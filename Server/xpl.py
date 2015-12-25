@@ -1,4 +1,41 @@
+'''
+Types de messages possibles pour l'instant à faire :
 
+OSD :
+osd.basic
+	write
+		command = write
+		text = tesdsqdsqd
+	clear
+		command = clear
+homeeasy :
+homeeasy.basic : controle chacon
+	on/off
+		command = on/off : on = 0, off = 1
+		adress = 
+		unit =
+	preset
+		command = preset
+		level = (1-15)
+		adress = 
+		unit =
+x10
+x10.basic
+	command =
+	device = 
+	house = 
+	[level = ]
+	[data1 = ]
+	[data2 = ]
+XPL
+control.basic (Multiprise)
+	command = on/off
+	device = 
+
+zwave
+zwave.basic
+à voir, on, off, level
+'''
 class XPL:
 	def __init__(self, source, target):
 		self.source = source
@@ -12,10 +49,19 @@ class XPL:
 		self.type = "x10.basic"
 		self.device = device
 		self.command = command
+	def x10security(self, device, command):
+		self.type = "x10.security"
+		self.device = device
+		self.command = command
 	def xpl(self, device, command):
 		self.type = "xpl.basic"
 		self.device = device
 		self.command = command
+	def zwave(self, device, command)
+		self.type = "zwave.basic"
+		self.device = device
+		self.command = command
+
 	def generate_header(self):
 		header = "xpl-cmnd"
 		header += '\n'
@@ -35,7 +81,7 @@ class XPL:
 		data += '\n'
 		data += "{"
 		data += '\n'
-		if self.type == "x10.basic":
+		if self.type == "x10.basic" or self.type == "x10.security":
 			data += "device=" + self.device
 			data += '\n'
 			data += "command=" + self.command
@@ -52,6 +98,11 @@ class XPL:
 			data += '\n'
 			data += "command=" + self.command
 			data += '\n'
+		elif self.type == "zwave.basic"
+			data += "node=" + self.device
+			data += '\n'
+			data += "command=" + self.command
+			data += '\n'
 		data += '}'
 		return data
 	def getData(self):
@@ -60,5 +111,5 @@ class XPL:
 		return d
 
 x = XPL("dqsd", "abc")
-x.homeeasy("dqsd", "on", "ds")
+x.x10security("on", "ds")
 print x.getData()
