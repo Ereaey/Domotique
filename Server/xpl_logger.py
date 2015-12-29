@@ -18,12 +18,11 @@ try:
 except socket.error:
 	print "Problem Socket : Bind"
 
-file = open("log.txt", "w")
-
 while True:
+	file = open("log.txt", "aw")
 	data, addr = serv.recvfrom(1024)
 	date = datetime.datetime.today()
 	print "{} : {}".format(date, addr[0])
 	print data
 	file.write("%s : %s \n%s\n" % (date, addr[0], data))
-
+	file.close()
