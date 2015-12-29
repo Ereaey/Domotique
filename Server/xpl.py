@@ -1,41 +1,3 @@
-'''
-Types de messages possibles pour l'instant à faire :
-
-OSD :
-osd.basic
-	write
-		command = write
-		text = tesdsqdsqd
-	clear
-		command = clear
-homeeasy :
-homeeasy.basic : controle chacon
-	on/off
-		command = on/off : on = 0, off = 1
-		adress = 
-		unit =
-	preset
-		command = preset
-		level = (1-15)
-		adress = 
-		unit =
-x10
-x10.basic
-	command =
-	device = 
-	house = 
-	[level = ]
-	[data1 = ]
-	[data2 = ]
-XPL
-control.basic (Multiprise)
-	command = on/off
-	device = 
-
-zwave
-zwave.basic
-à voir, on, off, level
-'''
 class XPL:
 	def __init__(self, source, target):
 		self.source = source
@@ -57,7 +19,7 @@ class XPL:
 		self.type = "xpl.basic"
 		self.device = device
 		self.command = command
-	def zwave(self, device, command)
+	def zwave(self, device, command):
 		self.type = "zwave.basic"
 		self.device = device
 		self.command = command
@@ -98,7 +60,7 @@ class XPL:
 			data += '\n'
 			data += "command=" + self.command
 			data += '\n'
-		elif self.type == "zwave.basic"
+		elif self.type == "zwave.basic":
 			data += "node=" + self.device
 			data += '\n'
 			data += "command=" + self.command
@@ -111,5 +73,5 @@ class XPL:
 		return d
 
 x = XPL("dqsd", "abc")
-x.x10security("on", "ds")
+x.homeeasy("b1", "2", "on")
 print x.getData()
