@@ -1,28 +1,35 @@
-class XPL:
+class XPL_Msg:
 	def __init__(self, source, target):
 		self.source = source
 		self.target = target
+		self.header = self.generate_header()
+		self.body = ""
+		self.type = ""
 	def homeeasy(self, address, unit, command):
 		self.type = "homeeasy.basic"
-		self.address = address
-		self.unit = unit
-		self.command = command
+		self.add("address", address)
+		self.add("unit", unit)	
+		self.add("command", command)	
 	def x10(self, device, command):
 		self.type = "x10.basic"
-		self.device = device
-		self.command = command
+		self.add("device", device)
+		self.add("command", command)		
 	def x10security(self, device, command):
 		self.type = "x10.security"
-		self.device = device
-		self.command = command
+		self.add("device", device)
+		self.add("command", command)
 	def xpl(self, device, command):
 		self.type = "xpl.basic"
-		self.device = device
-		self.command = command
+		self.add("device", device)
+		self.add("command", command)
 	def zwave(self, device, command):
-		self.type = "zwave.basic"
-		self.device = device
-		self.command = command
+		self.self.type = "zwave.basic"
+		self.add("node", device)
+		self.add("command", command)
+	def add(self, key, value):
+		self.body += key + "=" + value + '\n'
+	def setType(self, type):
+		self.type = type
 
 	def generate_header(self):
 		header = "xpl-cmnd"
@@ -43,28 +50,7 @@ class XPL:
 		data += '\n'
 		data += "{"
 		data += '\n'
-		if self.type == "x10.basic" or self.type == "x10.security":
-			data += "device=" + self.device
-			data += '\n'
-			data += "command=" + self.command
-			data += '\n'
-		elif self.type == "xpl.basic":
-			data += "device=" + self.device
-			data += '\n'
-			data += "command=" + self.command
-			data += '\n'
-		elif self.type == "homeeasy.basic":
-			data += "address=" + self.address
-			data += '\n'
-			data += "unit=" + self.unit
-			data += '\n'
-			data += "command=" + self.command
-			data += '\n'
-		elif self.type == "zwave.basic":
-			data += "node=" + self.device
-			data += '\n'
-			data += "command=" + self.command
-			data += '\n'
+		data += self.body
 		data += '}'
 		return data
 	def getData(self):
@@ -72,6 +58,7 @@ class XPL:
 		d += self.generate_data()
 		return d
 
-x = XPL("dqsd", "abc")
-x.homeeasy("b1", "2", "on")
-print x.getData()
+if __name__ == '__main__':
+	x = XPL_Msg("dqsd", "abc")
+	x.homeeasy("b1", "2", "on")
+	print x.getData()
