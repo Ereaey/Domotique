@@ -13,7 +13,12 @@ class XPL_Msg:
 	def x10(self, device, command):
 		self.type = "x10.basic"
 		self.add("device", device)
-		self.add("command", command)		
+		self.add("command", command)
+	def sensor(self, device, type, current):
+		self.type = "sensor.basic"
+		self.add("device", device)
+		self.add("type", type)
+		self.add("current", current)		
 	def x10security(self, device, command):
 		self.type = "x10.security"
 		self.add("device", device)
@@ -60,5 +65,5 @@ class XPL_Msg:
 
 if __name__ == '__main__':
 	x = XPL_Msg("dqsd", "abc")
-	x.homeeasy("b1", "2", "on")
+	x.sensor("A3", "input", "pulse")
 	print x.getData()
