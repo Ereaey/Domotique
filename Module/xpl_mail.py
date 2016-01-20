@@ -1,6 +1,11 @@
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
+import sys
+import socket
+sys.path.append("../Server")
+from xpl_parser import *
+
 
 class Mail:
 	def __init__(self, login, password):
@@ -23,6 +28,16 @@ class Mail:
 	def close(self):
 		self.server.quit()
 
-e = Mail("anthony.arthus@gmail.com", "arthus1204")
-e.send("baudelotmarvin@gmail.com", "Test", "dqsd")
-e.close()
+if __name__ == '__main__':
+	try:
+		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		s.bind(('', 5001))
+	except:
+		print "Error socket"
+	mail = Mail("domotique.project@gmail.com", "Aze12345")
+	while (1):
+		d = s.recvfrom(1024)
+		e = XPL_Parser(d[0])
+		if e.extractProtocol() == "sendmsg.smtp":
+			mail.send(e.extract("to"), e.extract("subject"), e.extract("body"))
+		print "Mail sent"
