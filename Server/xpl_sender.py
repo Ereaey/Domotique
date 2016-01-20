@@ -2,16 +2,15 @@ import socket
 import sys
 
 class XPL_Sender:
-	def __init__(self, ip, port):
-		self.ip = ip
+	def __init__(self, port):
 		self.port = port
-		self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
-
+		self.s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+		self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
+		self.s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, True)
 	def send(self, data):
 		try:
-			self.s.connect((self.ip, self.port))
-			self.s.send(data)
-			print("Message send")
+			self.s.sendto(data, ("<broadcast>", self.port))
+			self.s.sendto(data, ("", self.port))
 		except:
 			pass
 
@@ -19,5 +18,5 @@ class XPL_Sender:
 		self.s.close()
 
 if __name__ == '__main__':
-	c = XPL_Sender(sys.argv[1], int(sys.argv[2]))
-	c.send(sys.argv[3])
+	c = XPL_Sender(int(sys.argv[1]))
+	c.send(sys.argv[2])
