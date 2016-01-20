@@ -32,12 +32,18 @@ if __name__ == '__main__':
 	try:
 		s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 		s.bind(('', 5001))
+		print "Demarrage module Mail"
 	except:
-		print "Error socket"
+		print "Module Mail : Probleme port deja utilise"
+		sys.exit(0)
 	mail = Mail("domotique.project@gmail.com", "Aze12345")
 	while (1):
-		d = s.recvfrom(1024)
-		e = XPL_Parser(d[0])
-		if e.extractProtocol() == "sendmsg.smtp":
-			mail.send(e.extract("to"), e.extract("subject"), e.extract("body"))
-		print "Mail sent"
+		try:
+			d = s.recvfrom(1024)
+			e = XPL_Parser(d[0])
+			if e.extractProtocol() == "sendmsg.smtp":
+				mail.send(e.extract("to"), e.extract("subject"), e.extract("body"))
+			print "Mail envoye"
+		except KeyboardInterrupt:
+			print "Fermeture module mail"
+			sys.exit(0)
