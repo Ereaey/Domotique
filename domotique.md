@@ -6,19 +6,22 @@
 Permet de récuperer les informations au sein d'une trame xpl
 
 ###xpl_sender.py
-Permet d'envoyer une trame en udp
+Permet d'envoyer une trame en udp (broadcast)
 
 ###xpl_treatment.py
 Permet de traiter les trames xpl recu pour lancer des évenements en conséquence
 
-###server_udp.py
-Permet de centraliser les différentes classes pour la mise en place du serveur au complet
+###xpl_exec.py
+Permet d'executer les évenements
 
-###xpl_logger.py
+###xpl_logger.py (Test)
 Permet d'enregister dans un fichier toute les trames xpl naviguant dans le réseau avec l'heure et l'addresse IP
 
 ###xpl.py
 Permet de générer les trames xpl
+
+###main.py
+Permet la création du serveur udp et l'utilisation des différentes classes
 
 ##Modules
 
@@ -31,3 +34,5 @@ Permet d'envoyer des mails via le protocole xpl
 ###xpl_ping.py
 Permet de recevoir le ping("google.com") via xpl
 
+###main.py
+Lance les différents modules en même temps
