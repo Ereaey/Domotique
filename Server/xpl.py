@@ -10,6 +10,27 @@ class XPL_Msg:
 		self.add("address", address)
 		self.add("unit", unit)	
 		self.add("command", command)	
+	def datetime(self, datetime, date, time):
+		self.type = "datetime.basic"
+		self.add("datetime", datetime)
+		self.add("date", date)
+		self.add("time", time)
+	def dawndusk(self, type, status):
+		self.type = "dawndusk.basic"
+		self.add("type", type)
+		self.add("status", status)
+	def mail(self, to, subject, body):
+		self.type = "sendmsg.smtp"
+		self.add("to", to)
+		self.add("subject", subject)
+		self.add("body", body)
+	def screen(self, command):
+		self.type = "osd.basic"
+		self.add("command", command)
+	def screenWrite(self, text):
+		self.type = "osd.basic"
+		self.add("command", "write")
+		self.add("text", text)
 	def x10(self, device, command):
 		self.type = "x10.basic"
 		self.add("device", device)
@@ -28,9 +49,14 @@ class XPL_Msg:
 		self.add("device", device)
 		self.add("command", command)
 	def zwave(self, device, command):
-		self.self.type = "zwave.basic"
+		self.type = "zwave.basic"
 		self.add("node", device)
 		self.add("command", command)
+	def ping(self, ping):
+		self.type = "ping.basic"
+		self.add("ping", ping)
+	def resetBody(self):
+		self.body = ""
 	def add(self, key, value):
 		self.body += key + "=" + value + '\n'
 	def setType(self, type):
@@ -65,5 +91,5 @@ class XPL_Msg:
 
 if __name__ == '__main__':
 	x = XPL_Msg("dqsd", "abc")
-	x.sensor("A3", "input", "pulse")
+	x.screenWrite("clear")
 	print x.getData()

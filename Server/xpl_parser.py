@@ -17,6 +17,12 @@ class XPL_Parser:
 	def getType(self):
 		return self.type
 
+	def getCurrent(self):
+		return self.extract("current")
+
+	def getTypeData(self):
+		return self.extract("type")
+
 	def getDevice(self):
 		return self.extract("device")
 
@@ -46,6 +52,15 @@ class XPL_Parser:
 
 	def getStatus(self):
 		return self.extract("status")
+
+	def getDatetime(self):
+		return self.extract("datetime")
+
+	def getDate(self):
+		return self.extract("date")
+
+	def getTime(self):
+		return self.extract("time")
 
 	def extractType(self):
 		f = self.data.find('\n', 0)
