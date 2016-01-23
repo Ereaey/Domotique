@@ -91,5 +91,5 @@ class XPL_Msg:
 
 if __name__ == '__main__':
 	x = XPL_Msg("dqsd", "abc")
-	x.screenWrite("clear")
+	x.sensor("A3", "input", "pulse")
 	print x.getData()

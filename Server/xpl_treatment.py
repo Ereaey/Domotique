@@ -8,7 +8,6 @@ class XPL_Treatment:
 	def __init__(self, data):
 		self.parser = XPL_Parser(data)
 		for l in os.listdir("scripts/cond/"):
-			print l
 			file = open('scripts/cond/' + l, "r")
 			self.data = file.read()
 			if self.verif_protocol() == True:
@@ -42,5 +41,3 @@ class XPL_Treatment:
 			return self.data[e + len(key):f]
 		else:
 			return "Not found"
-
-x = XPL_Treatment(sys.argv[1])
