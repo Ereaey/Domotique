@@ -1,0 +1,4 @@
+header=sendmsg.smtp
+to=anthony.arthus@gmail.com
+subject=Domotique
+body=truc de fou

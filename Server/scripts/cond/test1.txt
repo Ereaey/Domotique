@@ -1,0 +1,5 @@
+header=sensor.basic
+device=A3
+type=input
+current=pulse
+action=action.txt
