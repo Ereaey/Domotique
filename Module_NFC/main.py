@@ -1,7 +1,7 @@
 import nxppy
 import time
-import xpl
-import xpl_sender
+from xpl import *
+from xpl_sender import *
 import sqlite3
 
 
@@ -16,17 +16,17 @@ while True:
 		print "Read uid", uid
 		
 		if uid == "FA5958EA":#Thibault
-			message = XPL("NFC", "*")
+			message = XPL_Msg("NFC", "*")
 			message.sensor("A3", "input", "pulse")
 			conn.send(message.getData())
 			time.sleep(30)
 		elif uid == "76F11908":#Adeline
-			message = XPL("NFC", "*")
+			message = XPL_Msg("NFC", "*")
 			message.sensor("A4", "input", "pulse")
 			conn.send(message.getData())
 			time.sleep(30)
 		elif uid == "DA0D57EA":#Anthony
-			message = XPL("NFC", "*")
+			message = XPL_Msg("NFC", "*")
 			message.sensor("A5", "input", "pulse")
 			conn.send(message.getData())
 			time.sleep(30)					
