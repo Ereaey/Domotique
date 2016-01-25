@@ -10,7 +10,7 @@ class XPL_Sender:
 	def send(self, data):
 		try:
 			self.s.sendto(data, ("<broadcast>", self.port))
-			self.s.sendto(data, ("", self.port))
+			#self.s.sendto(data, ("", self.port))
 		except:
 			pass
 
