@@ -7,8 +7,8 @@ from xpl_parser import *
 sys.stdout.flush()
 
 port = 5001
-GPIO.setMode(GPIO.BOARD)
-GPIO.setup(17, GPIO.OUT)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(11, GPIO.OUT)
 
 try:
 	serv = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -38,19 +38,19 @@ while True:
 		protocol = x.getProtocol()
 		print "Command name : ", commandName 
 		print "Protocol : ", protocol
-		if x.getType() == "control.basic":
+		if x.getProtocol() == "control.basic":
 			if x.getDevice() == "M1":
 				if x.getCurrent() == "on":
-					GPIO.output(17, GPIO.HIGH)
+					GPIO.output(11, GPIO.HIGH)
 				elif x.getCurrent() == "off":
-					GPIO.output(17, GPIO.LOW)
+					GPIO.output(11, GPIO.LOW)
 		date = datetime.datetime.today()
 		file.write("%s : %s \n%s\n" % (date, addr[0], data))
 		file.close()
 		
 		print "Message received"
 		sys.stdout.flush()
-		
+
 	except KeyboardInterrupt:
 		print "Server Close"
 		sys.stdout.flush()
