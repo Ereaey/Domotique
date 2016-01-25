@@ -104,7 +104,7 @@ def log():
 	return data
 
 @app.route('/log_server')
-def log():
+def log_s():
 	file = open("log_s.txt", "r")
 	data = ""
 	for line in file:
@@ -113,7 +113,15 @@ def log():
 	file.close()
 	return data
 
-
+@app.route('/log_module')
+def log_mod():
+	file = open("log_mod.txt", "r")
+	data = ""
+	for line in file:
+		data += line
+		data += '<br />'
+	file.close()
+	return data
 @app.route('/stats')
 def stats():
 	data = "Boot time : "
