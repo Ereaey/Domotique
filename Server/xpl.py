@@ -15,6 +15,11 @@ class XPL_Msg:
 		self.add("datetime", datetime)
 		self.add("date", date)
 		self.add("time", time)
+	def control(self, device, type, current):
+		self.type = "control.basic"
+		self.add("device", device)
+		self.add("type", type)
+		self.add("current", current)	
 	def dawndusk(self, type, status):
 		self.type = "dawndusk.basic"
 		self.add("type", type)
@@ -91,5 +96,5 @@ class XPL_Msg:
 
 if __name__ == '__main__':
 	x = XPL_Msg("dqsd", "abc")
-	x.sensor("A3", "input", "pulse")
+	x.control("M1", "on", "on")
 	print x.getData()
