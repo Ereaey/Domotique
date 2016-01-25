@@ -136,4 +136,4 @@ def stats():
 	data += str(psutil.cpu_percent(interval=1, percpu=True))
 	return data
 
-run(app, host='localhost', port=8080)
+run(app, host='', port=8080)
