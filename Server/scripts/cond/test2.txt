@@ -1,0 +1,5 @@
+header=sensor.basic
+device=A4
+type=input
+current=pulse
+action=action_prise.txt

@@ -1,0 +1,5 @@
+header=sensor.basic
+device=A5
+type=input
+current=pulse
+action=action_prise2.txt
